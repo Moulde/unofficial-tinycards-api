@@ -12,6 +12,8 @@ Imports:
     tidyverse,
     stringr,
     jsonlite,
+    xlsx,
+    readxl,
     httr
 Suggests:
     testthat,
