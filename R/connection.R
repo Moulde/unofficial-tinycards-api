@@ -20,7 +20,7 @@ create_connection <- function( ) {
 		stop(
 			sprintf(
 				"Tinycards initial connection failed [%s]\n%s\n", 
-				status_code( resp ),
+				httr::status_code( resp ),
 				httr::content( resp, "text", encoding = "UTF-8" )
 			),
 			call. = FALSE
@@ -32,9 +32,9 @@ create_connection <- function( ) {
 
 #' Login to tidycards
 #'
-#' @param connection
-#' @param username
-#' @param password
+#' @param connection connection
+#' @param username username
+#' @param password password
 #' @return list connection
 #' @export
 #'

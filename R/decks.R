@@ -1,6 +1,6 @@
 
 #' List all your current decks
-#' @param connection
+#' @param connection connection
 #' @return decklist each item with slots id, name, and image_url
 #' @export
 list_decks <- function( connection ) {
@@ -49,8 +49,8 @@ list_decks <- function( connection ) {
 
 
 #' Load a deck
-#' @param connection
-#' @param deck_id
+#' @param connection connection
+#' @param deck_id deck id
 #' @return list, all about the deck including its cards
 #' @export
 load_deck <- function( connection, deck_id ) {
@@ -87,8 +87,8 @@ load_deck <- function( connection, deck_id ) {
 
 
 #' Update a deck
-#' @param connection
-#' @param deck
+#' @param connection connection
+#' @param deck deck object
 #' @return boolean success
 #' @export
 update_deck <- function( connection, deck ) {
@@ -132,8 +132,8 @@ update_deck <- function( connection, deck ) {
 
 
 #' Create a deck
-#' @param connection
-#' @param deck
+#' @param connection connection
+#' @param deck deck object
 #' @return boolean success
 #' @export
 create_deck <- function( connection, deck ) {
@@ -141,7 +141,7 @@ create_deck <- function( connection, deck ) {
 		stop( "u cant update a deck without bein authenticated" )
 	}
 	tfile <- tempfile()
-	GET( deck$imageUrl, httr::write_disk( tfile, overwrite=TRUE ) )
+	httr::GET( deck$imageUrl, httr::write_disk( tfile, overwrite=TRUE ) )
 	resp <- httr::POST(
 		url = paste0( api_base_url(), "decks" ),
 		httr::add_headers( 
@@ -182,8 +182,8 @@ create_deck <- function( connection, deck ) {
 }
 
 #' Delete a deck
-#' @param connection
-#' @param deck_id
+#' @param connection connection
+#' @param deck_id deck id
 #' @return boolean success
 #' @export
 delete_deck <- function( connection, deck_id ) {
