@@ -152,7 +152,7 @@ create_deck <- function( connection, deck ) {
 		body = list(
 			name = deck$name,
 			description = deck$description,
-			private = toString( deck$private ),
+			private = jsonlite::toJSON( deck$private, auto_unbox = T ),
 			ttsLanguages = jsonlite::toJSON( deck$ttsLanguages ),
 			blacklistedSideIndices = jsonlite::toJSON( deck$blacklistedSideIndices ),
 			blacklistedQuestionTypes = jsonlite::toJSON( deck$blacklistedQuestionTypes ),
@@ -210,4 +210,120 @@ delete_deck <- function( connection, deck_id ) {
 		)
 	}
 	is.null( parsed )
+}
+
+
+
+#' Get the Nth card from a deck
+#' @param deck deck
+#' @param N N
+#' @return card
+#' @export
+get_card <- function( deck, N ) {
+	deck$cards[[ N ]]
+}
+
+#' Get the Nth side from a card
+#' @param card card
+#' @param N N
+#' @return side
+#' @export
+get_side <- function( card, N ) {
+	card$sides[[ N ]]
+}
+
+#' Does this card side have an Nth concept?
+#' @param card_side card side
+#' @param N M
+#' @return TRUE/FALSE
+#' @export
+has_concept <- function( card_side, N ) {
+	N %in% seq_along( card_side$concepts )
+}
+
+#' Get the Nth concept from a card side
+#' @param card_side card side
+#' @param N N
+#' @return concept
+#' @export
+get_concept <- function( card_side, N ) {
+	if ( !has_concept( card_side, N ) ) {
+		return( list() )
+	}
+	card_side$concepts[[ N ]]
+}
+
+
+#' Get the contents of a concept
+#' @param concept concept
+#' @return string
+#' @export
+get_concept_contents <- function( concept ) {
+	if ( is.null( names( concept ) ) ) {
+		return( "" )
+	}
+	else if ( concept$fact$type == "image" ) {
+		return( concept$fact$imageUrl )
+	}
+	else {
+		return( concept$fact$text )
+	}
+}
+
+
+#' Get the contents of a concept
+#' @param concept concept
+#' @return string
+#' @export
+get_concept_contents <- function( concept ) {
+	if ( is.null( names( concept ) ) ) {
+		return( "" )
+	}
+	else if ( concept$fact$type == "image" ) {
+		return( concept$fact$imageUrl )
+	}
+	else {
+		return( concept$fact$text )
+	}
+}
+
+
+#' Get the ID of a concept
+#' @param concept concept
+#' @return string
+#' @export
+get_concept_id <- function( concept ) {
+	if ( is.null( names( concept ) ) ) {
+		return( "" )
+	}
+	else {
+		return( concept$id )
+	}
+}
+
+#' Get the user ID of a concept
+#' @param concept concept
+#' @return string
+#' @export
+get_concept_user_id <- function( concept ) {
+	if ( is.null( names( concept ) ) ) {
+		return( "" )
+	}
+	else {
+		return( concept$userId )
+	}
+}
+
+
+#' Get the fact ID of a concept
+#' @param concept concept
+#' @return string
+#' @export
+get_concept_fact_id <- function( concept ) {
+	if ( is.null( names( concept ) ) ) {
+		return( "" )
+	}
+	else {
+		return( concept$fact$id )
+	}
 }
