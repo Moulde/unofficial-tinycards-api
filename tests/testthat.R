@@ -1,4 +1,5 @@
 library(testthat)
-library(tidycards)
+library(tinycards)
 
-test_check("tidycards")
+	
+test_check("tinycards")
