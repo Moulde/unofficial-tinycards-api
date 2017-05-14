@@ -153,10 +153,10 @@ create_deck <- function( connection, deck ) {
 			name = deck$name,
 			description = deck$description,
 			private = toString( deck$private ),
-			ttsLanguages = jsonlite::toJSON( deck$ttsLanguages, auto_unbox = T ),
-			blacklistedSideIndices = jsonlite::toJSON( deck$blacklistedSideIndices, auto_unbox = T ),
-			blacklistedQuestionTypes = jsonlite::toJSON( deck$blacklistedQuestionTypes, auto_unbox = T ),
-			gradingModes = jsonlite::toJSON( deck$gradingModes, auto_unbox = T ),
+			ttsLanguages = jsonlite::toJSON( deck$ttsLanguages ),
+			blacklistedSideIndices = jsonlite::toJSON( deck$blacklistedSideIndices ),
+			blacklistedQuestionTypes = jsonlite::toJSON( deck$blacklistedQuestionTypes ),
+			gradingModes = jsonlite::toJSON( deck$gradingModes ),
 			imageAttribution = deck$imageUrl,
 			imageFile = httr::upload_file( tfile ),
 			cards = jsonlite::toJSON( deck$cards, auto_unbox = T )
@@ -192,7 +192,7 @@ delete_deck <- function( connection, deck_id ) {
 	}
 	resp <- httr::DELETE(
 		url = paste0( api_base_url(), "decks/", deck_id ),
-		httr::add_headers( 
+		httr::add_headers(
 			"User-Agent" = connection$useragent,
 			"Referer" = "https://tinycards.duolingo.com/profile",
 			"Accept" = "application/json, text/plain, */*"
