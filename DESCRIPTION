@@ -2,14 +2,17 @@ Package: tidycards
 Type: Package
 Title: Unofficial Tidycards API
 Version: 0.1.0
-Authors@R: as.person( "Dirty Trash Girl <_____________@__.com> [aut, cre]" )
-Description: This is an unofficial R package to access the Tinycards API. It was created because their interface for creating and maintaining decks is trash.
+Authors@R: as.person( "Dirty Trash Girl <email@google.com> [aut, cre]" )
+Description: This is an unofficial R package to access the Tinycards API. It was 
+	created because their interface for creating and maintaining decks is trash.
 License: file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports:
-    purrr,
-    tidyverse
+    tidyverse,
+    stringr,
+    jsonlite,
+    httr
 Suggests:
     testthat,
     knitr,
