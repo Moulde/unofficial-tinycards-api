@@ -53,7 +53,12 @@ login <- function( connection, username, password ) {
 		),
 		encode = "json"
 	)
-	parsed <- jsonlite::fromJSON( httr::content( resp, "text", encoding = "UTF-8" ), simplifyVector = FALSE )
+	the_text <- httr::content( resp, "text", encoding = "UTF-8" )
+	tryCatch({
+		parsed <- jsonlite::fromJSON( the_text, simplifyVector = FALSE )
+	}, error = function( e ) {
+		stop( sprintf( "Error %s: Could not parse JSON %s", e, the_text ) )
+	})
 	if ( httr::http_error( resp ) ) {
 		stop(
 			sprintf(

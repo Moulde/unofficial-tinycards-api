@@ -18,7 +18,12 @@ list_decks <- function( connection ) {
 			userId = connection$userid
 		)
 	)
-	parsed <- jsonlite::fromJSON( httr::content( resp, "text", encoding = "UTF-8" ), simplifyVector = FALSE )
+	the_text <- httr::content( resp, "text", encoding = "UTF-8" )
+	tryCatch({
+		parsed <- jsonlite::fromJSON( the_text, simplifyVector = FALSE )
+	}, error = function( e ) {
+		stop( sprintf( "Error %s: Could not parse JSON %s", e, the_text ) )
+	})
 	if ( httr::http_error( resp ) ) {
 		stop(
 			sprintf(
@@ -68,7 +73,12 @@ load_deck <- function( connection, deck_id ) {
 			expand = "true"
 		)
 	)
-	parsed <- jsonlite::fromJSON( httr::content( resp, "text", encoding = "UTF-8" ), simplifyVector = FALSE )
+	the_text <- httr::content( resp, "text", encoding = "UTF-8" )
+	tryCatch({
+		parsed <- jsonlite::fromJSON( the_text, simplifyVector = FALSE )
+	}, error = function( e ) {
+		stop( sprintf( "Error %s: Could not parse JSON %s", e, the_text ) )
+	})
 	if ( httr::http_error( resp ) ) {
 		stop(
 			sprintf(
@@ -114,7 +124,12 @@ update_deck <- function( connection, deck ) {
 		),
 		encode = "json"
 	)
-	parsed <- jsonlite::fromJSON( httr::content( resp, "text", encoding = "UTF-8" ), simplifyVector = FALSE )
+	the_text <- httr::content( resp, "text", encoding = "UTF-8" )
+	tryCatch({
+		parsed <- jsonlite::fromJSON( the_text, simplifyVector = FALSE )
+	}, error = function( e ) {
+		stop( sprintf( "Error %s: Could not parse JSON %s", e, the_text ) )
+	})
 	if ( httr::http_error( resp ) ) {
 		stop(
 			sprintf(
@@ -163,7 +178,12 @@ create_deck <- function( connection, deck ) {
 		),
 		encode = "multipart"
 	)
-	parsed <- jsonlite::fromJSON( httr::content( resp, "text", encoding = "UTF-8" ), simplifyVector = FALSE )
+	the_text <- httr::content( resp, "text", encoding = "UTF-8" )
+	tryCatch({
+		parsed <- jsonlite::fromJSON( the_text, simplifyVector = FALSE )
+	}, error = function( e ) {
+		stop( sprintf( "Error %s: Could not parse JSON %s", e, the_text ) )
+	})
 	if ( httr::http_error( resp ) ) {
 		stop(
 			sprintf(
@@ -198,7 +218,12 @@ delete_deck <- function( connection, deck_id ) {
 			"Accept" = "application/json, text/plain, */*"
 		)
 	)
-	parsed <- jsonlite::fromJSON( httr::content( resp, "text", encoding = "UTF-8" ), simplifyVector = FALSE )
+	the_text <- httr::content( resp, "text", encoding = "UTF-8" )
+	tryCatch({
+		parsed <- jsonlite::fromJSON( the_text, simplifyVector = FALSE )
+	}, error = function( e ) {
+		stop( sprintf( "Error %s: Could not parse JSON %s", e, the_text ) )
+	})
 	if ( httr::http_error( resp ) ) {
 		stop(
 			sprintf(
