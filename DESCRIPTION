@@ -1,6 +1,6 @@
-Package: tidycards
+Package: tinycards
 Type: Package
-Title: Unofficial Tidycards API
+Title: Unofficial Tinycards API
 Version: 0.1.0
 Authors@R: as.person( "Dirty Trash Girl <email@google.com> [aut, cre]" )
 Description: This is an unofficial R package to access the Tinycards API. It was 
