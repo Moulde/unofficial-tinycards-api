@@ -25,7 +25,7 @@ my_deck <- tinycards::load_deck( conn, decks[[ 1 ]]$id )
 my_deck$cards[[ 1 ]]$sides[[ 1 ]]$concepts[[ 1 ]]$fact$text <- "UPDATED TEXT FOR CARD 1 SIDE 1 FACT 1"
 tinycards::update_deck( conn, my_deck )
 
-# coming soon: create and update decks from excel files
+# create and update decks from excel files
 deck2excel( my_deck, "~/desktop/my_deck.xlsx" )
 # make changes in excel file...
 my_deck <- excel2deck( "~/desktop/my_deck.xlsx" )
