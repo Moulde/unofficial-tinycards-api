@@ -271,23 +271,6 @@ get_concept_contents <- function( concept ) {
 }
 
 
-#' Get the contents of a concept
-#' @param concept concept
-#' @return string
-#' @export
-get_concept_contents <- function( concept ) {
-	if ( is.null( names( concept ) ) ) {
-		return( "" )
-	}
-	else if ( concept$fact$type == "image" ) {
-		return( concept$fact$imageUrl )
-	}
-	else {
-		return( concept$fact$text )
-	}
-}
-
-
 #' Get the ID of a concept
 #' @param concept concept
 #' @return string
